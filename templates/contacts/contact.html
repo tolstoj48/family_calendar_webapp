@@ -1,0 +1,20 @@
+{% extends '../base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Nový kontakt
+{% endblock %}
+{% block content %}
+{% include "../menu.html" %}
+<br>
+<div class="container">
+  <form method="post">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div class='row'>
+      <div class="col text-center">
+        <button type="submit" class="btn btn-success btn-lg btn-block"> Uložit </button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

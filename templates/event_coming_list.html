@@ -1,0 +1,32 @@
+<!-- templates/event_choice_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+{% include "menu.html" %}
+<br>
+<div class="container">
+  <b>Seznam událostí:</b>
+  <br><br>
+
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col"> Název </th>
+        <th scope="col"> Kategorie </th>
+        <th scope="col"> Od </th>
+        <th scope="col"> Do </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in coming_events %}	
+        <tr>
+          <td> {{ i.title }} </td> 
+          <td> <div class="{{i.fetch_class}}"> {{ i.type_of_events }} </div> </td> 
+          <td> {{ i.start_time }} </td> 
+          <td scope="row"> {{ i.end_time }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+</div>
+{% endblock %}

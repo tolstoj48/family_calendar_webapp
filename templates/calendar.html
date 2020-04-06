@@ -1,0 +1,70 @@
+<!-- templates/calendar.html -->
+
+{% extends 'base.html' %}
+{% block content %}
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Přehled</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'seznam_kontaktu:list_contacts' %}">Kontakty</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'cal:event_new' %}">Založit novou událost</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'cal:calendar' %}?{{prev_month }}">Předchozí měsíc</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'cal:calendar' %}?{{next_month }}"> Další měsíc</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'cal:event_coming_list' %}"> Nejbližší události</a>
+      </li>
+      <li class="nav-item active dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Kategorie
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a class="btn btn-primary" href='{% url "cal:event_choice_list" choice="narozeniny"%}'> narozeniny</a>
+          <a class="btn btn-secondary" href='{% url "cal:event_choice_list" choice="svátek"%}'> svátek</a>
+          <a class="btn btn-success" href='{% url "cal:event_choice_list" choice="dovolená"%}'> dovolená</a>
+          <a class="btn btn-info" href='{% url "cal:event_choice_list" choice="doctor"%}'> doctor</a>
+          <br>
+          <a class="btn btn-warning" href='{% url "cal:event_choice_list" choice="other"%}'> other </a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="btn btn-outline-light my-2 my-sm-0" href="{% url 'logout' %}">Odhlásit</a>
+      </li>
+  </div>
+</nav>
+<!--months nav-->
+  <ul class="nav nav-pills nav-fill">
+    {% for i in months_for_loop %}
+        <li class="nav-item active bg-dark">
+            <a id ="p{{ i }}" href="" class="nav-link active bg-dark"></a>
+        </li>
+    {% endfor %}
+  </ul>
+<br>
+<!--calendar table-->
+<div class="container">
+    {{calendar }}
+</div> 
+<!--JS for months nav-->
+<script>
+    var today = new Date();
+    var i;
+    for (i = 1; i < 12; i++) {
+        var date = "?month=" + today.getFullYear() + '-' + (today.getMonth() + i);
+        var identification = "p" + i
+        document.getElementById(identification).href = date;
+        document.getElementById(identification).innerHTML = today.getMonth() + i
+    }
+</script>
+{% endblock %}

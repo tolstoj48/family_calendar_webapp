@@ -1,0 +1,36 @@
+{% extends '../base.html' %}
+{% block content %}
+{% include "../menu.html" %}
+<br>
+<div class="container">
+  <b>Seznam kontaktů:</b>
+  <br><br>
+  <a class="btn btn-dark btn-md" href="{% url 'seznam_kontaktu:new_contact' %}"> Vytvořit nový kontakt </a>
+  <br>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col"> Jméno </th>
+        <th scope="col"> Příjmení </th>
+        <th scope="col"> Telefonní číslo </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Změny </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in contacts %}  
+        <tr>
+          <td> {{ i.first_name }} </td> 
+          <td> {{ i.last_name }} </div> </td> 
+          <td> {{ i.phone_number}} </td> 
+          <td> {{ i.email }}</td>
+          <td>  <a href="{% url 'seznam_kontaktu:edit_contact' i.pk %}"> Editovat </a>
+          <a href="{% url 'seznam_kontaktu:delete_contact' i.pk %}"> Smazat </a></td>
+
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+</div>
+{% endblock %}

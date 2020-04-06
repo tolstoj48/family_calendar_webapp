@@ -1,0 +1,38 @@
+<!-- templates/event_choice_list.html -->
+{% extends 'base.html' %}
+{% block content %}
+{% include "menu.html" %}
+<br>
+<div class="container">
+    {% if events.0.type_of_events %}
+      <b> Vybraná kategorie: 
+        <div class="{{events.0.fetch_class}}"> 
+        {{ events.0.type_of_events }} 
+        </div>
+      </b>
+    {% else %}
+      <p>Ani jedna událost tohoto typu</p>
+    {% endif %}
+    <br><br>
+
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col"> Název </th>
+        <th scope="col"> Od </th>
+        <th scope="col"> Do </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in events %}  
+        <tr>
+          <td> {{ i.title }} </td> 
+          <td> {{ i.start_time }} </td> 
+          <td scope="row"> {{ i.end_time }}</td>
+
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>  
+</div>
+{% endblock %}

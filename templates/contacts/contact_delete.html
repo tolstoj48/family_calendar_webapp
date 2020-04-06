@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Smazání kontaktu</h2>
+    <form action="" method="post">{% csrf_token %}
+        <p>Určitě chceš smáznout kontakt "{{ contact.first_name }} {{ contact.last_name }}"</p>
+        <input class="btn btn-dark btn-lg" type="submit" value="Smáznout" />
+        <a class="btn btn-dark btn-lg" href="{% url 'seznam_kontaktu:list_contacts' %}"> Ne </a>
+    </form>
+{% endblock %}
